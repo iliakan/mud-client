@@ -13,6 +13,7 @@ module.exports = class extends ConnectorHandler {
     this.connector.write("c sanc jumpapa");
     this.connector.write("c sanc atiel");
     this.connector.write("c sanc kef");
+    this.connector.write("c sanc minn");
   }
 
 };

@@ -8,7 +8,7 @@ module.exports = class extends AutoKill {
 
   constructor(connector) {
     super(connector, {
-      waitBetween: 45*3*1e3,
+      waitBetween: 60*3*1e3,
       attack: 'dirt',
       there: 'wuussw',
       back: 'enndde',

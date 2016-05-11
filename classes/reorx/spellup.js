@@ -5,6 +5,7 @@ const SpellupHandler = require('../../lib/spellup');
 let spells = [
   'detect invis',
   'armor',
+  'frenzy',
   'bless',
   'protection',
   'fly',

@@ -38,6 +38,24 @@ module.exports = class extends ConnectorHandler {
     });
   }
 
+  get connectorEvents() {
+    return ['readlineServer'];
+  }
+
+  onReadlineServer(line) {
+
+    let match = line.match(/^A strange buzzing sound fills your ears as (.*) pops in from nowhere!/);
+
+    if (match) {
+      this.connector.write(`get "${match[1]}"`);
+      this.connector.write(`put "${match[1]}" back`);
+      return;
+    }
+
+
+  }
+
+
   disable() {
     super.disable();
     this.stopRun = true;
@@ -80,10 +98,9 @@ module.exports = class extends ConnectorHandler {
             connector.once('readlineServer', function onLine(line) {
               // console.log("ONLINE", JSON.stringify(line));
               if (line.includes('DEAD!!')) {
-                connector.write('get chance');
-                connector.write('put chance ' + connector.character.store);
-                connector.write('get fortune');
-                connector.write('put fortune ' + connector.character.store);
+                // connector.write('get chance');
+                // connector.write('get luck');
+                // connector.write('get fortune');
                 connector.write('get book');
                 if (self.options.onKill) {
                   self.options.onKill.call(self, connector);
@@ -112,12 +129,19 @@ module.exports = class extends ConnectorHandler {
             if (i == this.options.targets.length) break;
           }
 
+          // console.log(this.connector.character.state);
+          if (this.connector.character.state == this.connector.character.BATTLE) {
+            // console.log("WAIT FINISH");
+            yield function(callback) {
+              this.connector.once('battleFinish', () => callback());
+            }.bind(this);
+          }
+
         }
 
         if (!walks.length) {
           break;
         }
-
         if (this.options.betweenWalks) {
           if (typeof this.options.betweenWalks == 'function') {
             this.options.betweenWalks.call(this);
@@ -126,7 +150,14 @@ module.exports = class extends ConnectorHandler {
           }
         }
 
-        connector.write(walks.shift());
+        let nextWalk = walks.shift();
+        connector.show("NEXT " + nextWalk);
+        connector.write(nextWalk);
+        if(nextWalk.startsWith('open ')) {
+          nextWalk = walks.shift();
+          connector.show("NEXT " + nextWalk);
+          connector.write(nextWalk);
+        }
 
       }
 
@@ -138,6 +169,10 @@ module.exports = class extends ConnectorHandler {
         connector.character.drink();
       }
       */
+
+      // connector.write('put luck ' + connector.character.store);
+      // connector.write('put chance ' + connector.character.store);
+      // connector.write('put fortune ' + connector.character.store);
 
       connector.write('drop all.spellbook');
 

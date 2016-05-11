@@ -6,7 +6,7 @@ module.exports = class extends AutoBattleHandler {
 
   constructor(connector) {
     super(connector, 'cast slow', function(line) {
-      return line == 'Spell failed.' || line.endsWith('is moving at normal speed.');
+      return line == 'Spell failed.'; // || line.endsWith('is moving at normal speed.');
     });
   }
 

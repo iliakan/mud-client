@@ -24,6 +24,7 @@ class InteractionNotifier extends ConnectorHandler {
     ) {
 
       this.connector.ipc.of.mud.emit('interaction', `[${this.connector.character.name}] ${line.trim()}`);
+      
       notifier.notify({
         message: line,
         sound: 'Submarine'

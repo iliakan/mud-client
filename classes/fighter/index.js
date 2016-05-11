@@ -1,11 +1,21 @@
 'use strict';
 
-const ConnectorHandler = require('../lib/connectorHandler');
+const ConnectorHandler = require('../../lib/connectorHandler');
 
-module.exports = class FighterTriggers extends ConnectorHandler {
+module.exports = class extends ConnectorHandler {
 
   get connectorEvents() {
     return ['readlineServer'];
+  }
+
+  get connectorCommands() {
+    return ['spellup'];
+  }
+
+  onCommandSpellup(args) {
+    this.connector.write('warc');
+    this.connector.write('bers');
+    this.connector.write('adren');
   }
 
   onReadlineServer(line) {
@@ -36,6 +46,10 @@ module.exports = class FighterTriggers extends ConnectorHandler {
 
     if (line == 'Your blood cools down.') {
       connector.write('adren')
+    }
+
+    if (line == "You don't feel quite so tough." || line == "You flex your muscles, but fail to toughen yourself up.") {
+      connector.write('tough')
     }
 
   }

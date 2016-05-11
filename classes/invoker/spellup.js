@@ -8,9 +8,10 @@ let spells = [
   'blink',
   'fly',
   'interposing hand',
-  // 'lightning shield',
-  // 'earthshield',
-  // 'force field'
+  'lightning shield',
+  'earthshield',
+  'iceshield',
+  'force field'
 ];
 
 module.exports = class extends SpellupHandler {

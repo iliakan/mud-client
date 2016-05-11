@@ -6,10 +6,10 @@ const ConnectorHandler = require('../lib/connectorHandler');
 module.exports = class extends ConnectorHandler {
 
   get connectorCommands() {
-    return ['opall'];
+    return ['o'];
   }
 
-  onCommandOpall(args) {
+  onCommandO(args) {
     this.connector.write('open east');
     this.connector.write('open west');
     this.connector.write('open south');

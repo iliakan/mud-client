@@ -17,7 +17,7 @@ module.exports = class extends ConnectorHandler {
   onCommandEdge() {
     new AffectReader(this.connector, affects => {
 
-      let full = false;
+      let full = true;
       if (!affects['resist poison']) {
         this.connector.ipc.of.mud.emit('all', {to: 'ethero', command: '#groupdo rp'});
       }
@@ -34,31 +34,38 @@ module.exports = class extends ConnectorHandler {
       if (!affects['resist negative']) {
         this.connector.ipc.of.mud.emit('all', {to: 'elly', command: '#groupdo rn'});
       }
+
       if (!affects['resist lightning'] && full) {
-        this.connector.ipc.of.mud.emit('all', {to: 'ethero', command: '#groupdo rl'});
-        // this.connector.ipc.of.mud.emit('all', {to: 'rorks', command: '#groupdo rl'});
+        // this.connector.ipc.of.mud.emit('all', {to: 'ethero', command: '#groupdo rl'});
+        this.connector.ipc.of.mud.emit('all', {to: 'rorks', command: '#groupdo rl'});
+      }
+
+      if (!affects['bless']) {
+        this.connector.ipc.of.mud.emit('all', {to: 'rorks', command: '#groupdo c bless'});
       }
 
       if (!affects['proxied earthshield'] && full) {
         this.connector.ipc.of.mud.emit('all', {to: 'inno', command: '#groupdo c earthshield'});
       }
+/*
 
       if (!affects['proxied fireshield'] && full) {
         this.connector.ipc.of.mud.emit('all', {to: 'inno', command: '#groupdo c fireshield'});
       }
-      /*
+*/
+
       if (!affects['proxied iceshield']) {
         this.connector.ipc.of.mud.emit('all', {to: 'inno', command: '#groupdo c iceshield'});
-      }*/
-
+      }
+/*
       if (!affects['proxied energyshield'] && full) {
         this.connector.ipc.of.mud.emit('all', {to: 'inno', command: '#groupdo c energyshield'});
       }
+*/
 
-      /*
       if (!affects['proxied lightning shield']) {
         this.connector.ipc.of.mud.emit('all', {to: 'inno', command: '#groupdo c "lightning shield"'});
-      }*/
+      }
 
       if (!affects['sanctuary']) {
         this.connector.ipc.of.mud.emit('all', {to: 'jumbo', command: '#sanc'});

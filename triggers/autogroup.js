@@ -17,9 +17,18 @@ module.exports = class extends ConnectorHandler {
   onReadlineServer(line) {
 
     let match = line.match(/^(\w+) now follows you./);
-    if (!match) return;
+    if (match) {
+      this.connector.write('group ' + match[1]);
+      return;
+    }
 
-    this.connector.write('group ' + match[1]);
+    match = line.match(/^(\w+) beckons for you to follow. Better hurry up!/);
+
+    if (match) {
+      this.connector.write('follow ' + match[1]);
+      return;
+    }
+
 
   }
 
