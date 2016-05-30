@@ -18,7 +18,7 @@ module.exports = class extends AutoBattleHandler {
 
   constructor(connector) {
     // beware: invoker 'chain lightning' is area!
-    super(connector, "cast firechain", function(line) { // lightning bolt
+    super(connector, "cast 'magic missile", function(line) { // lightning bolt
       for (let i = 0; i < casted.length; i++) {
         let test = casted[i];
         if (line.startsWith(test)) {

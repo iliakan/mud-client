@@ -20,11 +20,12 @@ class InteractionNotifier extends ConnectorHandler {
       || line.match(/^\w+ tells you, /)
       || line.match(/^\w+ OOCs you, /)
       || line.match(/^\w+ (roars|says), /)
+      || line.match(/Unseen/)
       || line.match(/looks at/)
     ) {
 
       this.connector.ipc.of.mud.emit('interaction', `[${this.connector.character.name}] ${line.trim()}`);
-      
+
       notifier.notify({
         message: line,
         sound: 'Submarine'

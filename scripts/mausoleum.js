@@ -10,7 +10,7 @@ module.exports = class extends AutoKill {
   constructor(connector) {
     super(connector, {
       waitBetween: 3 * 50 * 1000 + 1000,
-      attack: 'bleed',
+      attack: 'kill',
       there: '',
       back: '',
       /*

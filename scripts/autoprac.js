@@ -3,6 +3,7 @@
 
 const ConnectorHandler = require('../lib/connectorHandler');
 
+const SLEEP = false;
 
 let prepare = [
   'wake',
@@ -15,73 +16,63 @@ let prepare = [
 
 let prac;
 
-prac = [
-  "c 'resist acid' self",
-  "c 'resist negative' self",
-  'c sanc self',
-  'c sanc self',
-  "c 'remove curse' self",
-  "c 'cure blind' self",
-  "c 'cure poi' self"
-
-];
-
 
 prac = [
-  "c earthshield",
-  "c iceshield",
-  "c fireshield",
-  "c 'force field'",
-  "c 'force field'",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
-  "c 'enhanced fireball' self",
+  "c 'detect in",
+  "c 'cancel",
+  "c 'spider",
+  "c 'dispel m' self",
+  "c sanc",
+  // "c ironskin",
+  // "c haste self",
+  // "c displacement",
+  // "c pass",
+  "c protective",
+  // "c duo",
+  // "c astral",
+  // "c 'water brea",
+  // "c spellt",
+  // "c fly",
+  // "c identify 1.",
+  // "c 'harden",
+  "c 'faerie fog",
+  "c 'tesseract' wedna",
+  // "c 'word of recall'",
+  // "c grounding",
+  // "c enlar",
+  // "c shrink",
+  // "c eldrit",
+  // "c shape fox",
+  // "c shape fox",
+  // "c shape fox",
+  // "revert",
+  // "c beholder",
+  // "c beholder",
+  // "c beholder",
+  // "revert"
 ];
-
 
 /*
- prac =  [
- "c redempt self",
- "c utter"
- ];*/
-
 prac = [
-  "c sanc",
-  "c ironskin",
-  "c soften self",
-  "c haste self",
-  "c slow self",
-  "c slow self",
-  "c blink",
-  "c eldritch",
-  "c armor",
-  "c shield",
+  "c cancel",
+  // "c word",
+  "c gate rorks",
+  "c 'remove curse",
   "c pass",
-  "c protective",
-  "c duo"
+  "c 'resist fire",
+  "c 'resist cold",
+  "c 'resist light",
+  // "c bless",
+  "c fly",
+  "c protection",
+  "c 'ring of sanc",
+  "c 'cure bli",
+  "c 'detect i",
+  "c ident 1.",
+  "c 'cure poi",
+  "c 'cure dis"
 ];
-
-
-prac = [
-  'c crown',
-  "c wyvern",
-  "c imbue",
-];
-
-prac = ['c ignite dag', 'c "improved armor"', "c 'improved shield'"];
+*/
 
 module.exports = class extends ConnectorHandler {
 
@@ -110,15 +101,20 @@ module.exports = class extends ConnectorHandler {
         let cmd = prepare[i];
         this.connector.write(cmd);
       }
-      let loops = 20;
+      let loops = 2;
       for (let l = 0; l < loops; l++) {
         for (let i = 0; i < prac.length; i++) {
           let cmd = prac[i];
           this.connector.write(cmd);
         }
       }
-      this.connector.write('sleep rug');
-      this.connector.write('sleep');
+
+      // this.connector.write('sleep rug');
+      if (SLEEP) {
+        this.connector.write('sleep');
+      } else {
+        this.connector.write('smile');
+      }
 
     }
 
@@ -126,17 +122,18 @@ module.exports = class extends ConnectorHandler {
 
 
   onReadlineServer(line) {
-    if (line.includes('You go to sleep')) {
+    if (line.includes('You go to sleep') || line.includes('You smile happily.')) {
       this.casting = false;
     }
 
     if (line.includes('You wake') && this.connector.character.manaPercent < 0.8) {
-      this.connector.write('sleep rug');
+      // this.connector.write('sleep rug');
       this.connector.write('sleep');
     }
   }
 
 
 };
+
 
 

@@ -104,7 +104,7 @@ class Connector extends EventEmitter {
       if (line.includes('SOLACE II, The Awakening')) {
         this.write(charName);
         this.write(charConfig.password);
-        this.write('Y'); // reconnect if needed
+        this.write('Y\n'); // reconnect if needed
         this.readlineServer.removeListener('line', login);
       }
     }.bind(this));
