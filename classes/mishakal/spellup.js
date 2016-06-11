@@ -2,17 +2,16 @@
 
 const SpellupHandler = require('../../lib/spellup');
 
-let spells = [
-  'detect invis',
-  'bless',
-  'protection',
-  'armor',
-  'fly',
-  'sanctuary',
-  'wyvern watch',
-  'crown of archons',
-  'bless'
-];
+let spells = {
+  'detect invis':     true,
+  'bless':            true,
+  'protection':       true,
+  'armor':            true,
+  'fly':              true,
+  'sanctuary':        true,
+  'wyvern watch':     true,
+  'crown of archons': true
+};
 
 module.exports = class extends SpellupHandler {
 

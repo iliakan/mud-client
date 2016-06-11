@@ -18,12 +18,23 @@ const ConnectorHandler = require('../lib/connectorHandler');
 
 class AutoEatTriggers extends ConnectorHandler {
 
+  get connectorCommands() {
+    return ['autoeat'];
+  }
+
+  onCommandAutoeat() {
+    if (this.enabled) this.enabled = false;
+    else this.enabled = true;
+    this.connector.showInfo('autoeat ' + this.enabled);
+  }
+
 
   get connectorEvents() {
     return ['readlineServer'];
   }
 
   onReadlineServer(line) {
+    if (this.enabled === false) return;
 
     let connector = this.connector;
 

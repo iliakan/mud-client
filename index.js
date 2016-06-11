@@ -57,10 +57,14 @@ connector.loadHandler('./commands/edge');
 connector.loadHandler('./triggers/weapon');
 connector.loadHandler('./commands/sle');
 connector.loadHandler('./commands/afk');
+connector.loadHandler('./commands/trigger');
 connector.loadHandler('./commands/buyfood');
 connector.loadHandler('./triggers/autogroup');
 
 
 connector.loadHandler('./notifiers/interaction');
+connector.loadHandler('./notifiers/master');
+connector.loadHandler('./notifiers/disarm');
 
+connector.loadHandler('./commands/g');
 

@@ -7,15 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "mclient.nodejs@gmail.com",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/mud-client/mud-client"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mud-client/mud-client"
   },
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "fs-extra": "^0.28.0",
+    "keypress": "^0.2.1",
     "lodash": "^4.11.1",
     "node-ipc": "^7.0.0",
     "node-notifier": "^4.5.0",

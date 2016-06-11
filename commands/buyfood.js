@@ -12,14 +12,15 @@ module.exports = class extends ConnectorHandler {
     return ['buyfood'];
   }
 
-  onCommandBuyfood() {
+  onCommandBuyfood(args) {
+    let store = args[0] || this.connector.character.store;
     for(let i=0; i<30; i++) {
       this.connector.write('buy ' + this.connector.character.food);
-      this.connector.write(`put ${this.connector.character.food} ${this.connector.character.store}`);
+      this.connector.write(`put ${this.connector.character.food} ${store}`);
     }
     for(let i=0; i<3; i++) {
       this.connector.write('buy ' + this.connector.character.water);
-      this.connector.write(`put ${this.connector.character.water} ${this.connector.character.store}`);
+      this.connector.write(`put ${this.connector.character.water} ${store}`);
     }
   }
 

@@ -15,6 +15,7 @@ module.exports = class extends ConnectorHandler {
   onCommandSpellup(args) {
     this.connector.write('warc');
     this.connector.write('bers');
+    this.connector.write('stance fury');
     this.connector.write('adren');
   }
 

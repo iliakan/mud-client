@@ -12,6 +12,65 @@ const path = require('path');
 const fse = require('fs-extra');
 const ipc = require('./lib/ipc');
 
+class ReadlineInterface extends readline.Interface {
+  constructor(...args) {
+    super(...args);
+    this.setPrompt('');
+    this.prompt(true); // no reset cursor position @ prompt
+  }
+
+  handleKey(key) {
+    // ctrl + arrows are for text editing
+    if (key.ctrl && ['up', 'down', 'left', 'right'].includes(key.name)) {
+      key.ctrl = false;
+      return false;
+    }
+
+    if (key && key.name == 'up') {
+      this.emit('line', key.shift ? 'u' : 'n');
+      return true;
+    }
+    if (key && key.name == 'down') {
+      this.emit('line', key.shift ? 'd' : 's');
+      return true;
+    }
+    if (key && key.name == 'left') {
+      this.emit('line', 'w');
+      return true;
+    }
+    if (key && key.name == 'right') {
+      this.emit('line', 'e');
+      return true;
+    }
+
+  }
+
+  _ttyWrite(s, key) {
+    if (key) {
+      let handled = this.handleKey(key);
+      if (handled) return;
+    }
+
+    // vs <target>
+    // alias a1 murder <target>
+    if (s == '`') {
+      this.emit('line', 'a1'); // attack 2
+      return;
+    }
+    if (s == '~') {
+      this.emit('line', 'a2'); // attack 2
+      return;
+    }
+/*
+    if (s == '!') {
+      this.emit('line', '!'); // attack
+      return;
+    }
+*/
+    super._ttyWrite(s, key);
+  }
+}
+
 /**
  * events:
  *  readlineServer - a line from server
@@ -51,12 +110,10 @@ class Connector extends EventEmitter {
       this.readlineClient.close();
     });
 
-    this.readlineClient = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout // need that for history and special keys to work
-    });
-
-    this.readlineClient.setPrompt('');
+    this.readlineClient = new ReadlineInterface(
+      process.stdin,
+      process.stdout // need that for history and special keys to work
+    );
 
     telnetInput.on('data', data => this.emit('dataServer', data));
 
@@ -107,6 +164,14 @@ class Connector extends EventEmitter {
         this.write('Y\n'); // reconnect if needed
         this.readlineServer.removeListener('line', login);
       }
+
+      if (line == 'The realm will await your return.') {
+        process.exit();
+      }
+
+      if (line == '[Hit Return to continue]') {
+        this.write('\r\n');
+      }
     }.bind(this));
 
     this.readlineServer.on('line', line => {
@@ -125,8 +190,6 @@ class Connector extends EventEmitter {
       debug("<--", line);
     });
 
-
-    this.readlineClient.prompt(true); // no reset cursor position @ prompt
 
     this.readlineClient.on('line', line => {
       line = line.trim();

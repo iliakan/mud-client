@@ -31,7 +31,7 @@ module.exports = class extends ConnectorHandler {
   }
 
   onStats(stats) {
-    if (!stats.battle || !this.enabled || this.inProcess) return;
+    if (!this.enabled || this.inProcess || !stats.battle) return;
 
     this.inProcess = true;
     new GroupReader(this.connector, group => {

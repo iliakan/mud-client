@@ -10,10 +10,11 @@ module.exports = class extends ConnectorHandler {
 
   onCommandSanc(args) {
     this.connector.write("c sanc inno");
+    this.connector.write("c sanc minn");
     this.connector.write("c sanc jumpapa");
     this.connector.write("c sanc atiel");
-    this.connector.write("c sanc kef");
-    this.connector.write("c sanc minn");
+    this.connector.write("c sanc sorel");
+    this.connector.write("c sanc coihl");
   }
 
 };
