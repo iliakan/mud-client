@@ -21,7 +21,7 @@ but can be adjusted to run on other muds as well.
 
 I wrote this in the memory of old MUDs:
 
-- Solace MUD which I played so long ago (now works at <telnet://solace.appcasion.com:4000>, current setup tested on it).
+- Solace MUD which I played so long ago.
 - Dawn of Eternity (offline) where I learned English while creating Areas (nice ones, let me know if any other MUD wants them).
 
 It can be used as a replacement of telnet or as a base of AI or toying with scripts, cause JavaScript is nice for it.
