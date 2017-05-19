@@ -17,7 +17,7 @@ but can be adjusted to run on other muds as well.
 6. Commands to check affects and spellup the missing benedictions (can't miss anything)
 7. Multicharing with ease (traveling as a group of 8 to harsh areas, using IPC server to send commands).
 
-...Seedwalks and more, any helpful behavior can be scripted with JS.
+...Speedwalks and more, any helpful behavior can be scripted with JS.
 
 I wrote this in the memory of old MUDs:
 
