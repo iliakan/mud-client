@@ -1,6 +1,8 @@
 
 # MUD Client for Programmers
 
+**Disclaimer. This is a game-related toy.** 
+
 Hi guys. In old times I used Tintin++ or JMC to play [MUDs](https://en.wikipedia.org/wiki/MUD). But scripting them is a pain.
 
 This MUD client is made for easier scripting, orginaly for ROM-based MUDs (Solace, CarrionFields and others),
