@@ -8,6 +8,7 @@ const EventEmitter = require('events').EventEmitter;
 const debug = require('debug')('connector');
 const through2 = require('through2');
 const chalk = require('chalk');
+const stripAnsi = require('strip-ansi');
 const path = require('path');
 const fse = require('fs-extra');
 const ipc = require('./lib/ipc');
@@ -178,7 +179,7 @@ class Connector extends EventEmitter {
 
       if (this.readlineServerDisabled) return;
 
-      line = chalk.stripColor(line.trim());
+      line = stripAnsi(line.trim());
 
       // console.log("LINE", JSON.stringify(line));
 
