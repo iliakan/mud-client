@@ -17,7 +17,7 @@ Features:
 5. Notifying at OS-level about incoming tells (useful when a char is growing while you're doing smth else).
 5. Watching a group in battle to heal the most wounded one (handy for priests).
 6. Commands to check affects and spellup the missing benedictions (can't miss anything)
-7. Multicharing with ease (traveling as a group of 8 to harsh areas, using IPC server to send commands).
+7. Multicharing with ease (battle-tested by traveling as a group of 8 to harsh areas, if multicharing is disallowed then one can use SSH-tunnels to another IPs to cover it).
 
 ...Speedwalks and more, any helpful behavior can be scripted with JS.
 
