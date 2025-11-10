@@ -6,7 +6,7 @@
 Hi guys. In old times I used Tintin++ or JMC to play [MUDs](https://en.wikipedia.org/wiki/MUD). 
 
 This MUD client is made for powerful javascript-scripting. Orginally for ROM-based MUDs (Solace, CarrionFields and others),
-but can be adjusted to run on other muds as well.
+but can be adjusted to run on other muds as well. Text-based (no MUD protocols), yet capable.
 
 Features:
 
